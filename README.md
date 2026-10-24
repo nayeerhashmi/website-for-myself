@@ -1,17 +1,31 @@
-# FRAME ZERO
+# FRAME ZERO Portfolio
 
-An independent creative direction portfolio for music videos, moving images, and visual storytelling.
+A static portfolio website for creative direction, music videos, and visual storytelling.
+
+## Project structure
+
+- `index.html` — website page and content structure.
+- `styles/frame-zero-portfolio.css` — all website styling and responsive layout.
+- `scripts/frame-zero-interactions.js` — small interactive behaviours.
+- `assets/images/` — project photography, thumbnails, and visual assets.
+- `assets/fonts/` — locally hosted font files, if added later.
+- `assets/icons/` — logos and interface icons, if added later.
+- `.github/workflows/pages.yml` — GitHub Pages deployment workflow.
+
+Keep files in the folder that matches their purpose. Create a clearly named subfolder when a category grows. Use descriptive filenames rather than names like `new-file`, `final-final`, or `test2`. Keep `index.html` at the repository root so static hosting can find the homepage.
 
 ## Run locally
 
-Open `index.html` in a browser. The site is a static page and needs no build step.
+Open `index.html` in a browser. This is a static site and does not need a build step.
 
 ## Before publishing
 
-- Replace the Instagram link in the contact section with your actual profile.
-- Replace the concept imagery and project descriptions with your own released work as it becomes available.
-- Add your preferred contact email when ready.
+- Replace the Instagram placeholder with the actual profile.
+- Replace concept imagery and sample project descriptions with real work.
+- Add a contact email when ready.
 
-## Deploy
+## Deployment
 
-The repository includes a GitHub Pages workflow. In the repository settings, set **Pages → Build and deployment → Source** to **GitHub Actions**. Future pushes to `main` will publish the site.
+The repository includes a GitHub Pages workflow. For GitHub Pages, set **Settings → Pages → Build and deployment → Source** to **GitHub Actions**.
+
+For Cloudflare Pages, connect this repository and use production branch `main`, framework preset `None`, no build command, and output directory `/` or `.` (the repository root containing `index.html`).
