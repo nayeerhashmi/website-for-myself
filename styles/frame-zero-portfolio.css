@@ -88,3 +88,17 @@ body{background:#080808}
 .camera-lens:focus-visible{outline:2px solid #f04438;outline-offset:8px}
 .lens-image{filter:grayscale(1) contrast(1.2) brightness(var(--lens-brightness, .62));transition:filter .3s ease,transform .25s ease-out}
 @media(prefers-reduced-motion:reduce){.reveal-ready .section-head,.reveal-ready .work-card,.reveal-ready .about-grid,.reveal-ready .service,.reveal-ready .contact{opacity:1;transform:none;transition:none}}
+
+
+/* FRAME ZERO — smooth, continuous page movement */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+html{scroll-padding-top:18px;scroll-behavior:auto}
+body{overscroll-behavior-y:none}
+a,button,input{ -webkit-tap-highlight-color:transparent }
+::view-transition-old(root),::view-transition-new(root){animation-duration:.35s}
+@media(prefers-reduced-motion:reduce){
+  html,html.lenis{scroll-behavior:auto!important}
+  .lenis.lenis-smooth{scroll-behavior:auto!important}
+}
