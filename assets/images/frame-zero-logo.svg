@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 150" role="img" aria-labelledby="title desc">
+  <title id="title">FRAME ZERO</title>
+  <desc id="desc">FRAME ZERO creative studio wordmark with a red optical aperture mark.</desc>
+  <rect width="640" height="150" fill="none"/>
+  <g fill="#f0eee8" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="78" letter-spacing="-5">
+    <text x="8" y="91">FRAME</text>
+    <text x="282" y="91">ZERO</text>
+  </g>
+  <circle cx="265" cy="67" r="8" fill="#f04438"/>
+  <circle cx="265" cy="67" r="18" fill="none" stroke="#f04438" stroke-width="2"/>
+  <path d="M265 49 L265 85 M247 67 L283 67 M252 54 L278 80 M278 54 L252 80" stroke="#f04438" stroke-width="1.5" opacity=".8"/>
+  <text x="10" y="125" fill="#9b9992" font-family="Arial, Helvetica, sans-serif" font-size="13" letter-spacing="5">INDEPENDENT VISUAL PRACTICE</text>
+  <path d="M500 120 H630" stroke="#f04438" stroke-width="3"/>
+</svg>
