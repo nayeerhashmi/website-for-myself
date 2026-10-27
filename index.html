@@ -53,6 +53,20 @@
           <div class="lens-spec mono"><span>FZ / 001</span><span>50 MM · F/1.4</span></div>
         </div>
         <div class="lens-caption"><span class="mono">A frame is a choice.</span><strong>Look closer.</strong></div>
+        <div class="lens-controls" aria-label="Interactive lens controls">
+          <div class="lens-control-heading mono"><span>OPTICAL CONTROLS</span><span id="rotationReadout">ROT 000°</span></div>
+          <div class="rotation-controls">
+            <button type="button" class="lens-control-button" id="rotateLeft" aria-label="Rotate lens left">↶</button>
+            <button type="button" class="lens-control-button" id="rotateRight" aria-label="Rotate lens right">↷</button>
+            <button type="button" class="lens-control-button reset-control" id="resetLens">RESET</button>
+            <span class="mono drag-hint">DRAG LENS TO ROTATE</span>
+          </div>
+          <label class="aperture-control" for="apertureRange">
+            <span class="aperture-label mono">APERTURE <strong id="apertureValue">F/1.4</strong></span>
+            <input id="apertureRange" type="range" min="14" max="160" step="1" value="14" aria-label="Adjust camera aperture from f/1.4 to f/16">
+            <span class="aperture-scale mono"><span>WIDE · F/1.4</span><span>NARROW · F/16</span></span>
+          </label>
+        </div>
         <div class="lens-side-label mono">OPTICAL STUDY — 001</div>
       </div>
     </section>
