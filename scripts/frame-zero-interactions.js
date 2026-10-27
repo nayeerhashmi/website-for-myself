@@ -160,3 +160,35 @@ const menu=document.getElementById('menu');const nav=document.getElementById('na
     });
   }
 })();
+
+
+/* Smooth scrolling engine: native fallback remains if the CDN is unavailable */
+(() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (typeof window.Lenis !== 'function') return;
+  const lenis = new window.Lenis({
+    duration: 1.15,
+    easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    orientation: 'vertical',
+    gestureOrientation: 'vertical',
+    smoothWheel: true,
+    wheelMultiplier: 0.9,
+    touchMultiplier: 1.05,
+    infinite: false,
+    anchors: { offset: -12 }
+  });
+  window.frameZeroLenis = lenis;
+  const raf = time => {
+    lenis.raf(time);
+    window.requestAnimationFrame(raf);
+  };
+  window.requestAnimationFrame(raf);
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', event => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (!target) return;
+      event.preventDefault();
+      lenis.scrollTo(target, { offset: -12, duration: 1.05 });
+    });
+  });
+})();
