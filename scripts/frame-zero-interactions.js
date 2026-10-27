@@ -51,3 +51,80 @@ const menu=document.getElementById('menu');const nav=document.getElementById('na
     bubbleLayer.querySelectorAll('.glass-bubble').forEach(bubble => bubble.style.scale = '');
   });
 })();
+
+/* Rotatable camera lens and live aperture iris */
+(() => {
+  const stage = document.getElementById('lensStage');
+  const lens = stage?.querySelector('.camera-lens');
+  const aperture = stage?.querySelector('.lens-aperture');
+  const range = document.getElementById('apertureRange');
+  const apertureValue = document.getElementById('apertureValue');
+  const rotationReadout = document.getElementById('rotationReadout');
+  const left = document.getElementById('rotateLeft');
+  const right = document.getElementById('rotateRight');
+  const reset = document.getElementById('resetLens');
+  if (!stage || !lens || !aperture || !range) return;
+
+  let rotation = 0;
+  let dragging = false;
+  let startAngle = 0;
+  let startRotation = 0;
+  let activePointer = null;
+
+  const paintRotation = () => {
+    lens.style.setProperty('--lens-rotation', rotation + 'deg');
+    lens.style.rotate = rotation + 'deg';
+    rotationReadout.textContent = 'ROT ' + String(((Math.round(rotation) % 360) + 360) % 360).padStart(3, '0') + '°';
+  };
+  const setRotation = value => {
+    rotation = value;
+    paintRotation();
+  };
+  const getAngle = event => {
+    const rect = lens.getBoundingClientRect();
+    return Math.atan2(event.clientY - (rect.top + rect.height / 2), event.clientX - (rect.left + rect.width / 2)) * 180 / Math.PI;
+  };
+
+  lens.addEventListener('pointerdown', event => {
+    if (event.target.closest('.lens-controls')) return;
+    dragging = true;
+    activePointer = event.pointerId;
+    startAngle = getAngle(event);
+    startRotation = rotation;
+    lens.classList.add('is-dragging');
+    lens.setPointerCapture?.(event.pointerId);
+  });
+  lens.addEventListener('pointermove', event => {
+    if (!dragging || event.pointerId !== activePointer) return;
+    const next = startRotation + getAngle(event) - startAngle;
+    setRotation(next);
+  });
+  const endDrag = event => {
+    if (event.pointerId !== activePointer) return;
+    dragging = false;
+    activePointer = null;
+    lens.classList.remove('is-dragging');
+  };
+  lens.addEventListener('pointerup', endDrag);
+  lens.addEventListener('pointercancel', endDrag);
+  left?.addEventListener('click', () => setRotation(rotation - 15));
+  right?.addEventListener('click', () => setRotation(rotation + 15));
+  reset?.addEventListener('click', () => {
+    setRotation(0);
+    range.value = '14';
+    updateAperture();
+  });
+
+  function updateAperture() {
+    const f = Number(range.value) / 10;
+    const open = 44 - ((f - 1.4) / (16 - 1.4)) * 31;
+    aperture.style.setProperty('--aperture-open', open.toFixed(1) + '%');
+    aperture.style.opacity = String(0.96 - ((f - 1.4) / (16 - 1.4)) * 0.2);
+    apertureValue.textContent = 'F/' + f.toFixed(1);
+    stage.style.setProperty('--aperture-brightness', (1.16 - ((f - 1.4) / (16 - 1.4)) * 0.48).toFixed(2));
+    stage.style.setProperty('--aperture-blur', (((f - 1.4) / (16 - 1.4)) * 2.5).toFixed(2) + 'px');
+  }
+  range.addEventListener('input', updateAperture);
+  updateAperture();
+  paintRotation();
+})();
