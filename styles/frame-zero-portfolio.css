@@ -80,3 +80,11 @@ body{background:#080808}
 .lens-caption{bottom:25%}
 @media(max-width:760px){.lens-stage{padding-bottom:0}.lens-controls{width:calc(100% - 32px);bottom:2%;padding:10px 11px}.lens-caption{bottom:29%}.camera-lens{width:min(70%,370px)}.drag-hint{font-size:6px}}
 @media(max-width:420px){.lens-stage{min-height:440px}.lens-controls{bottom:2%;width:calc(100% - 24px)}.lens-caption{bottom:34%}.rotation-controls{margin-bottom:8px}.lens-control-button{min-width:29px;height:27px}.drag-hint{max-width:112px;text-align:right;line-height:1.4}}
+
+/* Lightweight cinematic reveal and focus polish; no framework required */
+.reveal-ready .section-head,.reveal-ready .work-card,.reveal-ready .about-grid,.reveal-ready .service,.reveal-ready .contact{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal-ready .is-visible{opacity:1!important;transform:translateY(0)!important}
+.work-card:nth-child(2){transition-delay:.08s}.work-card:nth-child(3){transition-delay:.16s}.work-card:nth-child(4){transition-delay:.24s}
+.camera-lens:focus-visible{outline:2px solid #f04438;outline-offset:8px}
+.lens-image{filter:grayscale(1) contrast(1.2) brightness(var(--lens-brightness, .62));transition:filter .3s ease,transform .25s ease-out}
+@media(prefers-reduced-motion:reduce){.reveal-ready .section-head,.reveal-ready .work-card,.reveal-ready .about-grid,.reveal-ready .service,.reveal-ready .contact{opacity:1;transform:none;transition:none}}
