@@ -128,3 +128,35 @@ const menu=document.getElementById('menu');const nav=document.getElementById('na
   updateAperture();
   paintRotation();
 })();
+
+/* Cinematic section reveals and keyboard controls, with reduced-motion support */
+(() => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealTargets = document.querySelectorAll('.section-head, .work-card, .about-grid, .service, .contact');
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    document.documentElement.classList.add('reveal-ready');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+    revealTargets.forEach(target => observer.observe(target));
+  }
+  const lens = document.querySelector('.camera-lens');
+  if (lens) {
+    lens.addEventListener('keydown', event => {
+      if (event.target !== lens) return;
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        document.getElementById(event.key === 'ArrowLeft' ? 'rotateLeft' : 'rotateRight')?.click();
+      }
+      if (event.key === 'Home') {
+        event.preventDefault();
+        document.getElementById('resetLens')?.click();
+      }
+    });
+  }
+})();
